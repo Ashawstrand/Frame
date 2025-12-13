@@ -4,6 +4,38 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Trending() {
+  
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+
+    async function fetchTrending() {
+      const response = await fetch(
+        'https://api.themoviedbb.org/3/trending/movie/day?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}'
+      );
+      const data = await response.json();
+      setMovies(data.results);
+    }
+    fetchTrending();
+  }, []);
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   return (
     <header className="w-full px-6 py-4 flex items-center justify-between bg-black">
       <Image src="/FrameLogo.png" alt="Frame logo" width={300} height={300} />
