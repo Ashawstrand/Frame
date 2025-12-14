@@ -20,7 +20,7 @@ export default function Home() {
       </header>
 
       <main className="flex flex-1 flex-col items-center justify-center px-16 w-full bg-white dark:bg-black text-center">
-        <h2 className="max-w-xl sm:text-5xl md:text-5xl lg:text-5xl font-semibold leading-15 tracking-tight text-black dark:text-zinc-50 mb-60">
+        <h2 className="max-w-xl text-5xl font-semibold leading-15 tracking-tight text-black dark:text-zinc-50 mb-60">
           All your favorite movies, right here.
         </h2>
       </main>
