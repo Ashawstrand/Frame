@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import MovieList from "../components/movieList";
 
 export default function Trending() {
   const [movies, setMovies] = useState([]);
@@ -35,21 +36,8 @@ export default function Trending() {
         Trending
       </h1>
       
-      <div className="flex justify-center">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 px-6 pb-20">
-      {movies.map((movie) => (
-        <div key={movie.id}>
-          <Image
-          className="rounded-lg cursor-pointer duration-300 hover:scale-105"
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt={movie.title}
-          width={300}
-          height={450}
-          />
-        </div>
-      ))}
+      <MovieList movies={movies} variant="trending" />
+    
     </div>
-    </div>
-    </div>
-  )
+  );
 }
