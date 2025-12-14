@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Trending() {
   
@@ -10,9 +10,7 @@ export default function Trending() {
   useEffect(() => {
 
     async function fetchTrending() {
-      const response = await fetch(
-        'https://api.themoviedbb.org/3/trending/movie/day?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}'
-      );
+      const response = await fetch("/api/trending");
       const data = await response.json();
       setMovies(data.results);
     }
@@ -20,23 +18,8 @@ export default function Trending() {
   }, []);
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   return (
+    <div>
     <header className="w-full px-6 py-4 flex items-center justify-between bg-black">
       <Image src="/FrameLogo.png" alt="Frame logo" width={300} height={300} />
       <Link
@@ -46,5 +29,15 @@ export default function Trending() {
         Sign Out
       </Link>
     </header>
+
+    <h1>
+      Trending Movies
+    </h1>
+    {movies.map((movie) => (
+      <h2 key={movie.id}>{movie.title}</h2>
+    ))}
+    <h2>{movie.title}</h2>
+    </div>
+    
   );
 }
