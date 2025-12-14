@@ -36,7 +36,7 @@ export default function Trending() {
       </h1>
       
       <div className="flex justify-center">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 px-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 px-6 pb-20">
       {movies.map((movie) => (
         <div key={movie.id}>
           <Image
