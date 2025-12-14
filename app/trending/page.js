@@ -32,7 +32,7 @@ export default function Trending() {
       </header>
 
       <h1 className="text-5xl text-center font-semibold leading-15 mb-20">
-        Trending Movies
+        Trending
       </h1>
       
       <div className="flex justify-center">
