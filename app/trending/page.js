@@ -40,7 +40,7 @@ export default function Trending() {
       {movies.map((movie) => (
         <div key={movie.id}>
           <Image
-          className="rounded-lg cursor-pointer"
+          className="rounded-lg cursor-pointer duration-300 hover:scale-105"
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title}
           width={300}
