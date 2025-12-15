@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function MovieCard({ movie, showRemove, onRemove }) {
   return (
     <div className="text-center">
-      <Link href={`/movie/${movie.id}`}>
+      <Link href={`/movieDetails?id=${movie.id}`}>
         <Image
           className="rounded-lg cursor-pointer duration-300 hover:scale-105"
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
