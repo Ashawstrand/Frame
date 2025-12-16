@@ -73,25 +73,25 @@ export default function MovieDetails() {
           </p>
           <ul className="space-y-2 text-gray-400">
             <li>
-              <span className="font-semibold text-white">Release Date:</span>{" "}
+              <span className="font-semibold text-red-600">Release Date:</span>{" "}
               {movie.release_date}
             </li>
             <li>
-              <span className="font-semibold text-white">Rating:</span>{" "}
+              <span className="font-semibold text-red-600">Rating:</span>{" "}
               {movie.vote_average && movie.vote_average > 0
                 ? movie.vote_average.toFixed(2) + " / 10"
                 : "Not yet rated"}
             </li>
             <li>
-              <span className="font-semibold text-white">Runtime:</span>{" "}
+              <span className="font-semibold text-red-600">Runtime:</span>{" "}
               {movie.runtime} mins
             </li>
             <li>
-              <span className="font-semibold text-white">Genres:</span>{" "}
+              <span className="font-semibold text-red-600">Genres:</span>{" "}
               {movie.genres?.map((g) => g.name).join(", ")}
             </li>
             <li>
-              <span className="font-semibold text-white">Cast: </span>{" "}
+              <span className="font-semibold text-red-600">Cast: </span>{" "}
               {cast.slice(0, 10).map((actor) => actor.name).join(", ")}
             </li>
           </ul>

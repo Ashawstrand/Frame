@@ -37,7 +37,7 @@ export default function Home() {
           All your favorite movies, right here.
         </h2>
 
-        <MovieList movies={trendingMovies.slice(0, 12)} />
+        <MovieList movies={trendingMovies.slice(0, 16)} />
       </main>
 
       <footer
