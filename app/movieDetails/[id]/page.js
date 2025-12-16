@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import Image from "next/image";
 import Header from "../../components/header";
 
-export default function MovieDetails( { params }) {
-  const { id } = params;
+export default function MovieDetails() {
+  const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
   const [cast, setCast] = useState([]);
@@ -14,9 +15,7 @@ export default function MovieDetails( { params }) {
     async function fetchMovie() {
       try {
         const response = await fetch(`/api/movieDetails/${id}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch movie details");
-        }
+        if (!response.ok) throw new Error("Failed to fetch movie details");
         const data = await response.json();
         setMovie(data);
       } catch (err) {
@@ -30,8 +29,7 @@ export default function MovieDetails( { params }) {
         if (!response.ok) throw new Error("failed to fetch cast");
         const data = await response.json();
         setCast(data.cast || []);
-      }
-      catch (err) {
+      } catch (err) {
         console.error(err);
       }
     }
@@ -60,8 +58,7 @@ export default function MovieDetails( { params }) {
 
   return (
     <div className="bg-black min-h-screen text-white px-6 py-10">
-    <Header/>
-
+      <Header />
       <main className="max-w-3xl mx-auto flex flex-col items-center gap-8 mt-5">
         <Image
           className="rounded-lg shadow-lg"
@@ -70,12 +67,10 @@ export default function MovieDetails( { params }) {
           width={400}
           height={525}
         />
-
         <div className="space-y-6 text-center text-lg mb-25">
           <p className="text-white text-xl leading-relaxed mb-10">
             {movie.overview}
           </p>
-
           <ul className="space-y-2 text-gray-400">
             <li>
               <span className="font-semibold text-white">Release Date:</span>{" "}
@@ -84,10 +79,9 @@ export default function MovieDetails( { params }) {
             <li>
               <span className="font-semibold text-white">Rating:</span>{" "}
               {movie.vote_average && movie.vote_average > 0
-              ? movie.vote_average.toFixed(2) + " / 10"
-              : "Not yet rated"}
+                ? movie.vote_average.toFixed(2) + " / 10"
+                : "Not yet rated"}
             </li>
-
             <li>
               <span className="font-semibold text-white">Runtime:</span>{" "}
               {movie.runtime} mins
@@ -96,10 +90,9 @@ export default function MovieDetails( { params }) {
               <span className="font-semibold text-white">Genres:</span>{" "}
               {movie.genres?.map((g) => g.name).join(", ")}
             </li>
-
             <li>
               <span className="font-semibold text-white">Cast: </span>{" "}
-              {cast.slice(0,10).map((actor) => actor.name).join(", ")}
+              {cast.slice(0, 10).map((actor) => actor.name).join(", ")}
             </li>
           </ul>
         </div>

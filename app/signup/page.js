@@ -21,7 +21,7 @@ export default function SignUp() {
                 type="text"
                 placeholder="Enter your name"
                 className="w-full px-5 py-4 rounded border border-zinc-700 bg-black text-white 
-                           placeholder:opacity-70 focus:outline-none focus:ring-2 focus:ring-red-600"
+                           placeholder:opacity-70 focus:bg-black focus:outline-none focus:ring-2 focus:ring-red-600"
               />
             </div>
 
@@ -34,7 +34,7 @@ export default function SignUp() {
                 type="email"
                 placeholder="Enter your email"
                 className="w-full px-5 py-4 rounded border border-zinc-700 bg-black text-white 
-                           placeholder:opacity-70 focus:outline-none focus:ring-2 focus:ring-red-600"
+                           placeholder:opacity-70 focus:bg-black focus:outline-none focus:ring-2 focus:ring-red-600"
               />
             </div>
 

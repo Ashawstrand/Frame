@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(_req, { params }) {
     
-    const { id } = params;
+    const { id } = await params;
 
     if (!id) {
         return NextResponse.json({ error: "Missing movie ID" }, { status: 400 });
