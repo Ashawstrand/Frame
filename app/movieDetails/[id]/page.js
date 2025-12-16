@@ -2,13 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import Header from "../components/header";
+import Header from "../../components/header";
 
-export default function MovieDetails() {
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
+export default function MovieDetails( { params }) {
+  const { id } = params;
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
   const [cast, setCast] = useState([]);
@@ -16,7 +13,7 @@ export default function MovieDetails() {
   useEffect(() => {
     async function fetchMovie() {
       try {
-        const response = await fetch(`/api/movieDetails?id=${id}`);
+        const response = await fetch(`/api/movieDetails/${id}`);
         if (!response.ok) {
           throw new Error("Failed to fetch movie details");
         }
@@ -29,7 +26,7 @@ export default function MovieDetails() {
 
     async function fetchCast() {
       try {
-        const response = await fetch(`/api/movieCredits?id=${id}`);
+        const response = await fetch(`/api/movieCredits/${id}`);
         if (!response.ok) throw new Error("failed to fetch cast");
         const data = await response.json();
         setCast(data.cast || []);
