@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Search() {
   const [query, setQuery] = useState("");
@@ -14,7 +15,7 @@ export default function Search() {
     const value = e.target.value;
     setQuery(value);
 
-     if (value.length > 2) {
+    if (value.length > 2) {
       const response = await fetch(
         `/api/search?query=${encodeURIComponent(value)}`
       );
@@ -27,20 +28,17 @@ export default function Search() {
     }
   };
 
-
-    const handleKeyDown = (e) => {
-      if (e.key === "ArrowDown") {
-        setHighlightedIndex((prev) =>
-          prev < results.length - 1 ? prev + 1 : prev
-        );
-      } else if (e.key === "ArrowUp") {
-        setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : prev));
-      } else if (e.key === "Enter" && highlightedIndex >= 0) {
-        router.push(`/movieDetails/${results[highlightedIndex].id}`);
-      }
-    };
-
-   
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowDown") {
+      setHighlightedIndex((prev) =>
+        prev < results.length - 1 ? prev + 1 : prev
+      );
+    } else if (e.key === "ArrowUp") {
+      setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : prev));
+    } else if (e.key === "Enter" && highlightedIndex >= 0) {
+      router.push(`/movieDetails/${results[highlightedIndex].id}`);
+    }
+  };
 
   return (
     <div className="relative w-full max-w-md">
@@ -59,11 +57,20 @@ export default function Search() {
           {results.map((movie, index) => (
             <li
               key={movie.id}
-              className="px-4 py-2 font-semibold hover:bg-red-600 cursor-pointer"
+              className="flex items-center w-full px-4 py-2 font-semibold hover:bg-red-600 cursor-pointer"
               onMouseEnter={() => setHighlightedIndex(index)}
               onClick={() => router.push(`/movieDetails/${movie.id}`)}
             >
-              {movie.title}
+              {movie.poster_path && (
+                <Image
+                  src={`https://image.tmdb.org/t/p/w92${movie.poster_path}`}
+                  alt={movie.title}
+                  className="object-cover rounded mr-3"
+                  width={40}
+                  height={60}
+                />
+              )}
+              <span className="text-white font-semibold">{movie.title}</span>
             </li>
           ))}
         </ul>
