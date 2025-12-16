@@ -76,7 +76,7 @@ export default function SignUp() {
             <p className="text-sm text-zinc-400">Already have an account?</p>
             <Link href="/login">
               <button className="mt-4 w-full py-3 rounded bg-black border hover:bg-zinc-900 transition-colors font-semibold text-lg">
-                Log In
+                Login
               </button>
             </Link>
           </div>
