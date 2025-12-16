@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Header from "../../components/header";
+import MovieCard from "@/app/components/movieCard";
 
 export default function MovieDetails() {
   const { id } = useParams();
@@ -60,13 +61,7 @@ export default function MovieDetails() {
     <div className="bg-black min-h-screen text-white px-6 py-10">
       <Header />
       <main className="max-w-3xl mx-auto flex flex-col items-center gap-8 mt-5">
-        <Image
-          className="rounded-lg shadow-lg"
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt={movie.title}
-          width={400}
-          height={525}
-        />
+        <MovieCard movie={movie} showHeart />
         <div className="space-y-6 text-center text-lg mb-25">
           <p className="text-white text-xl leading-relaxed mb-10">
             {movie.overview}
@@ -92,7 +87,10 @@ export default function MovieDetails() {
             </li>
             <li>
               <span className="font-semibold text-red-600">Cast: </span>{" "}
-              {cast.slice(0, 10).map((actor) => actor.name).join(", ")}
+              {cast
+                .slice(0, 10)
+                .map((actor) => actor.name)
+                .join(", ")}
             </li>
           </ul>
         </div>

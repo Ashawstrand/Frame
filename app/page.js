@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import Header from "./components/header";
 import MovieList from "./components/movieList";
 
@@ -37,7 +35,7 @@ export default function Home() {
           All your favorite movies, right here.
         </h2>
 
-        <MovieList movies={trendingMovies.slice(0, 16)} />
+        <MovieList movies={trendingMovies.slice(0, 16)} showHeart={false} />
       </main>
 
       <footer

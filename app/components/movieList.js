@@ -1,6 +1,6 @@
 import MovieCard from "./movieCard";
 
-export default function MovieList({ movies, variant, onRemove }) {
+export default function MovieList({ movies, showHeart = true }) {
     
     return (
 
@@ -10,8 +10,7 @@ export default function MovieList({ movies, variant, onRemove }) {
                     <MovieCard
                     key={movie.id}
                     movie={movie}
-                    showRemove={variant === "favorites"}
-                    onRemove={onRemove}
+                    showHeart={showHeart}
                     />
             ))}
             </div>
