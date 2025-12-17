@@ -6,10 +6,13 @@ import Search from "./search";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/app/utils/firebase";
 import { useState, useEffect } from "react";
+import { signOut } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [user, loading] = useAuthState(auth);
   const [showModal, setShowModal] = useState(false);
+  const router = useRouter();
 
   const handleFavoritesClick = (e) => {
     if (!user) {
@@ -18,7 +21,15 @@ export default function Header() {
     }
   };
 
-  
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      router.push("/");
+    } catch (err) {
+      console.error("Error signing out:", err);
+    }
+  };
+
   useEffect(() => {
     if (showModal) {
       //disable background scrolling when popup open
@@ -47,7 +58,7 @@ export default function Header() {
         </div>
 
         <div className="flex-1 flex justify-center px-6">
-        <Search />
+          <Search />
         </div>
 
         <nav className="flex items-center gap-6">
@@ -74,7 +85,16 @@ export default function Header() {
               Sign In
             </Link>
           )}
-          </nav>
+
+          {!loading && user && (
+            <button
+              onClick={handleSignOut}
+              className="px-8 py-4 text-xl font-semibold rounded-full bg-gray-700 text-white hover:bg-gray-600 transition-colors"
+            >
+              Sign Out
+            </button>
+          )}
+        </nav>
       </header>
 
       {showModal && (
