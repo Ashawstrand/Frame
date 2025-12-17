@@ -4,7 +4,7 @@ import Link from "next/link";
 import Header from "../components/header";
 import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { app } from "../utils/firebase";
+import { app, auth } from "../utils/firebase";
 
 export default function Login() {
 
@@ -12,8 +12,6 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const auth = getAuth(app);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,6 +33,7 @@ export default function Login() {
         break;
       case "auth/invalid-email":
         setError("Please enter a valid email address.")
+        break;
       default:
         setError("Login failed. Please try again.");
     }
