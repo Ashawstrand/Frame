@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Header from "../../components/header";
+import Footer from "../../components/footer";
 import MovieCard from "@/app/components/movieCard";
 import { auth, db } from "../../utils/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
@@ -113,6 +114,7 @@ export default function MovieDetails() {
           </ul>
         </div>
       </main>
+      <Footer/>
     </div>
   );
 }

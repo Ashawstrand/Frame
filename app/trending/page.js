@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Header from "../components/header";
+import Footer from "../components/footer";
 import MovieList from "../components/movieList";
 import { auth, db } from "../utils/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
@@ -53,6 +54,8 @@ export default function Trending() {
       ) : (
         <MovieList movies={movies} showHeart favorites={favorites} />
       )}
+
+      <Footer />
     </div>
   );
 }

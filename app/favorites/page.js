@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import MovieList from "../components/movieList";
 import Header from "../components/header";
+import Footer from "../components/footer";
 import { auth, db } from "../utils/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
 
@@ -31,6 +32,8 @@ export default function FavoritesPage() {
         My Favorites
       </h1>
       <MovieList movies={favorites} showHeart  alwaysFilled/>
+
+      <Footer/>
     </div>
   );
 }

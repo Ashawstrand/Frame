@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Header from "./components/header";
+import Footer from "./components/footer";
 import MovieList from "./components/movieList";
 
 export default function Home() {
@@ -36,12 +37,12 @@ useEffect(() => {
         </h2>
 
         <MovieList movies={topRatedMovies.slice(0,12)} showHeart={false} />
+
+
+        <Footer/>
       </main>
 
-      <footer
-      className="text-center">
-        <p>This will be a section dedicated to noting the TMDB API</p>
-      </footer>
+      
     </div>
   );
 }
