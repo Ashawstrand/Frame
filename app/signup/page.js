@@ -3,11 +3,11 @@ import Header from "../components/header";
 
 export default function SignUp() {
   return (
-    <div className="flex flex-col font-sans dark:bg-black">
+    <div className="flex flex-col font-sans dark:bg-black min-h-screen">
       <Header />
-      <div className="min-h-screen flex items-center justify-center bg-black text-white">
+      <div className="flex items-center justify-center bg-black text-white">
         <div className="bg-black p-16 rounded-lg shadow-lg w-full max-w-4xl">
-          <h1 className="text-5xl font-bold mb-12 text-center">
+          <h1 className="text-5xl font-bold mb-12 mt-5 text-center">
             Create Account
           </h1>
 
@@ -76,7 +76,7 @@ export default function SignUp() {
             <p className="text-sm text-zinc-400">Already have an account?</p>
             <Link href="/login">
               <button className="mt-4 w-full py-3 rounded bg-black border hover:bg-zinc-900 transition-colors font-semibold text-lg">
-                Login
+                Log In
               </button>
             </Link>
           </div>
