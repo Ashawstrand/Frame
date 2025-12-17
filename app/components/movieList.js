@@ -1,6 +1,6 @@
 import MovieCard from "./movieCard";
 
-export default function MovieList({ movies, showHeart = true }) {
+export default function MovieList({ movies, showHeart = true, alwaysFilled = false, favorites = [] }) {
     
     return (
 
@@ -11,6 +11,8 @@ export default function MovieList({ movies, showHeart = true }) {
                     key={movie.id}
                     movie={movie}
                     showHeart={showHeart}
+                    alwaysFilled={alwaysFilled}
+                    favorites={favorites}
                     />
             ))}
             </div>

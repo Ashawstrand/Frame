@@ -1,12 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import Header from "../components/header";
 import MovieList from "../components/movieList";
+import { auth, db } from "../utils/firebase";
+import { collection, onSnapshot } from "firebase/firestore";
 
 export default function Trending() {
   const [movies, setMovies] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     async function fetchTrending() {
@@ -21,16 +22,37 @@ export default function Trending() {
     fetchTrending();
   }, []);
 
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const favesRef = collection(db, "users", user.uid, "favorites");
+    const unsubscribe = onSnapshot(favesRef, (snapshot) => {
+      const favs = snapshot.docs.map((doc) => ({
+        id: doc.data().movieId,
+        ...doc.data(),
+      }));
+      setFavorites(favs);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   return (
     <div className="flex min-h-screen flex-col font-sans dark:bg-black">
-      <Header/>
+      <Header />
 
-      <h1 className="text-5xl text-center font-semibold leading-15 mt-30 mb-75">
+      <h1 className="text-5xl text-center font-semibold leading-15 mt-30 mb-70">
         Trending
       </h1>
-      
-      <MovieList movies={movies} variant="trending" />
-    
+
+      {movies.length === 0 ? (
+        <div className="flex flex-1 items-center justify-center">
+          <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      ) : (
+        <MovieList movies={movies} showHeart favorites={favorites} />
+      )}
     </div>
   );
 }

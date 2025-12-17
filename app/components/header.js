@@ -64,7 +64,7 @@ export default function Header() {
         <nav className="flex items-center gap-6">
           <Link
             href="/trending"
-            className="text-white text-xl font-semibold hover:text-red-600 transition-colors"
+            className="text-white text-2xl font-semibold hover:text-red-600 transition-colors"
           >
             Trending
           </Link>
@@ -72,7 +72,7 @@ export default function Header() {
           <Link
             href="/favorites"
             onClick={handleFavoritesClick}
-            className="flex items-center gap-2 text-white text-xl font-semibold hover:text-red-600 transition-colors"
+            className="flex items-center gap-2 text-white text-2xl font-semibold hover:text-red-600 transition-colors"
           >
             Favorites
           </Link>
@@ -89,7 +89,7 @@ export default function Header() {
           {!loading && user && (
             <button
               onClick={handleSignOut}
-              className="px-8 py-4 text-xl font-semibold rounded-full bg-gray-700 text-white hover:bg-gray-600 transition-colors"
+              className="px-8 py-4 text-xl cursor-pointer font-semibold rounded-full bg-red-600 text-white hover:bg-gray-600 transition-colors"
             >
               Sign Out
             </button>

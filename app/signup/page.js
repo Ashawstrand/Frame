@@ -34,6 +34,11 @@ export default function SignUp() {
       return;
     }
 
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
       return;
@@ -64,7 +69,7 @@ export default function SignUp() {
           setError("Please enter a valid email address.");
           break;
         case "auth/missing-password":
-          setError("Plese enter a password.");
+          setError("Please enter a password.");
           break;
         case "auth/weak-password":
           setError("Password should be at least 6 characters.");

@@ -5,12 +5,15 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import Header from "../../components/header";
 import MovieCard from "@/app/components/movieCard";
+import {auth, db } from "../../utils/firebase";
+import { collection, onSnapshot } from "firebase/firestore";
 
 export default function MovieDetails() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
   const [cast, setCast] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     async function fetchMovie() {
@@ -41,6 +44,23 @@ export default function MovieDetails() {
     }
   }, [id]);
 
+
+    useEffect(() => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const favesRef = collection(db, "users", user.uid, "favorites");
+    const unsubscribe = onSnapshot(favesRef, (snapshot) => {
+      const favs = snapshot.docs.map((doc) => ({
+        id: doc.data().movieId,
+        ...doc.data(),
+      }));
+      setFavorites(favs);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black text-white">
@@ -62,7 +82,7 @@ export default function MovieDetails() {
     <div className="bg-black min-h-screen text-white px-6 py-10">
       <Header />
       <main className="max-w-3xl mx-auto flex flex-col items-center gap-8 mt-5">
-        <MovieCard movie={movie} showHeart />
+        <MovieCard movie={movie} showHeart  favorites={favorites}/>
         <div className="space-y-6 text-center text-lg mb-25">
           <p className="text-white text-xl leading-relaxed mb-10">
             {movie.overview}

@@ -1,9 +1,10 @@
 import {
   doc,
+  getDoc,
   getDocs,
   setDoc,
   deleteDoc,
-  collection,
+  collection
 } from "firebase/firestore";
 import { auth, db } from "./firebase";
 
@@ -12,7 +13,7 @@ export async function addToFavorites(movie) {
   if (!user) return;
   const favesRef = doc(db, "users", user.uid, "favorites", movie.id.toString());
   await setDoc(favesRef, {
-    movieId: movie.id,
+    id: movie.id,
     title: movie.title,
     poster_path: movie.poster_path,
     release_date: movie.release_date,
@@ -31,16 +32,18 @@ export async function getFavorites() {
   if (!user) return [];
   const favesRef = collection(db, "users", user.uid, "favorites");
   const snapshot = await getDocs(favesRef);
-  return snapshot.docs.map((doc) => doc.data());
+  return snapshot.docs.map((doc) => ({
+    id: doc.data().movieId,
+    ...doc.data(),
+    isFavorite: true
+  }));
 }
 
 export async function toggleFavorite(movie) {
   const user = auth.currentUser;
   if (!user) return false;
-
-  const favRef = doc(db, "users", user.id, "favorites", movie.id.toString());
+  const favRef = doc(db, "users", user.uid, "favorites", movie.id.toString());
   const existing = await getDoc(favRef);
-
   if (existing.exists()) {
     await removeFromFavorites(movie.id);
     return false;
