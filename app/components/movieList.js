@@ -1,3 +1,5 @@
+"use client";
+
 import MovieCard from "./movieCard";
 
 export default function MovieList({ movies, showHeart = true, alwaysFilled = false, favorites = [] }) {
