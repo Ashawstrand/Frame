@@ -2,10 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-import Image from "next/image";
 import Header from "../../components/header";
 import MovieCard from "@/app/components/movieCard";
-import {auth, db } from "../../utils/firebase";
+import { auth, db } from "../../utils/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
 
 export default function MovieDetails() {
@@ -30,7 +29,7 @@ export default function MovieDetails() {
     async function fetchCast() {
       try {
         const response = await fetch(`/api/movieCredits/${id}`);
-        if (!response.ok) throw new Error("failed to fetch cast");
+        if (!response.ok) throw new Error("Failed to fetch cast");
         const data = await response.json();
         setCast(data.cast || []);
       } catch (err) {
@@ -44,8 +43,7 @@ export default function MovieDetails() {
     }
   }, [id]);
 
-
-    useEffect(() => {
+  useEffect(() => {
     const user = auth.currentUser;
     if (!user) return;
 
@@ -70,19 +68,18 @@ export default function MovieDetails() {
   }
 
   if (!movie) {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-black">
-      <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
-    </div>
-  );
-}
-
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-black min-h-screen text-white px-6 py-10">
       <Header />
       <main className="max-w-3xl mx-auto flex flex-col items-center gap-8 mt-5">
-        <MovieCard movie={movie} showHeart  favorites={favorites}/>
+        <MovieCard movie={movie} showHeart favorites={favorites} />
         <div className="space-y-6 text-center text-lg mb-25">
           <p className="text-white text-xl leading-relaxed mb-10">
             {movie.overview}

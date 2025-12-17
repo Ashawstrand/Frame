@@ -6,6 +6,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useState } from "react";
 import { toggleFavorite } from "../utils/favoritesFunctions";
 import { auth } from "../utils/firebase";
+
 export default function MovieCard({
   movie,
   showHeart = true,
@@ -28,20 +29,19 @@ export default function MovieCard({
   return (
     <div className="text-center">
       <div className="relative inline-block">
-        <Link href={`/${movie.media_type === "tv" ? "showDetails" : "movieDetails"}/${movie.id}`}>
-  <Image
-    className="rounded-lg cursor-pointer duration-300 hover:scale-105"
-    src={
-      movie.poster_path
-        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-        : "/fallback-poster.png"
-    }
-    alt={movie.title || movie.name || "Poster image"}
-    width={375}
-    height={400}
-  />
-</Link>
-
+        <Link href={`/movieDetails/${movie.id}`}>
+          <Image
+            className="rounded-lg cursor-pointer duration-300 hover:scale-105"
+            src={
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                : "/fallback-poster.png"
+            }
+            alt={movie.title || "Poster image"}
+            width={375}
+            height={400}
+          />
+        </Link>
 
         {showHeart && (
           <button

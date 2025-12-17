@@ -6,17 +6,17 @@ import MovieList from "./components/movieList";
 
 export default function Home() {
   
-  const [trendingMovies, setTrendingMovies] = useState([]);
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
   const [showText, setShowText] = useState(false);
 
-  useEffect(() => {
-    async function fetchTrending() {
-      const response = await fetch("/api/trending");
-      const data = await response.json();
-      setTrendingMovies(data.results || []);
-    }
-    fetchTrending();
-  }, []);
+useEffect(() => {
+  async function fetchTopRatedMovies() {
+    const response = await fetch("/api/highestRated");
+    const data = await response.json();
+    setTopRatedMovies(data.results || []);
+  }
+  fetchTopRatedMovies();
+}, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowText(true), 50);
@@ -35,7 +35,7 @@ export default function Home() {
           All your favorite movies, right here.
         </h2>
 
-        <MovieList movies={trendingMovies.slice(0,12)} showHeart={false} />
+        <MovieList movies={topRatedMovies.slice(0,12)} showHeart={false} />
       </main>
 
       <footer
