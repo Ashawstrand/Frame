@@ -1,1 +1,0 @@
-//future upgrade for a page dedicated to search results
