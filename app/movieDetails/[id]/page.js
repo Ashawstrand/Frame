@@ -50,12 +50,13 @@ export default function MovieDetails() {
   }
 
   if (!movie) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-black text-white">
-        <p className="font-semibold">Loading movie details...</p>
-      </div>
-    );
-  }
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-black">
+      <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  );
+}
+
 
   return (
     <div className="bg-black min-h-screen text-white px-6 py-10">

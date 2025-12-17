@@ -25,7 +25,7 @@ export default function Trending() {
     <div className="flex min-h-screen flex-col font-sans dark:bg-black">
       <Header/>
 
-      <h1 className="text-5xl text-center font-semibold leading-15 mb-20">
+      <h1 className="text-5xl text-center font-semibold leading-15 mb-50">
         Trending
       </h1>
       
